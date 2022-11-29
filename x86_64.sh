@@ -7,4 +7,7 @@ echo "src-git PWluci https://github.com/xiaorouji/openwrt-passwall.git;luci" >> 
 ./scripts/feeds update -a
 ./scripts/feeds install luci-app-passwall
 make defconfig
-make menuconfig
+# make menuconfig
+
+make download -j8 V=s && find dl -size -1024c -exec ls -l {} \; && make package/luci-app-passwall/{clean,compile} -j4
+make package/index
